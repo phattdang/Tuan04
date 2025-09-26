@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<persistence version="3.0" xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd">
+    <persistence-unit name="user-management" transaction-type="RESOURCE_LOCAL">
+        <!-- Persistence provider -->
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <properties>
+            <property name="jakarta.persistence.jdbc.driver" value="org.mariadb.jdbc.Driver" />
+            <property name="jakarta.persistence.jdbc.url"    value="jdbc:mariadb://localhost:3306/userdbv2" />
+            <property name="jakarta.persistence.jdbc.user"   value="root" />
+            <property name="jakarta.persistence.jdbc.password" value="sapassword" />
+
+            <!-- Automatically export the schema -->
+            <property name="hibernate.hbm2ddl.auto" value="update" />
+            <!--            <property name="jakarta.persistence.schema-generation.database.action" value="update"/>-->
+
+            <!--
+            update: Hibernate sẽ tự động tạo bảng nếu chưa tồn tại hoặc cập nhật schema nếu có thay đổi trong lớp User,
+            mà không xóa dữ liệu hiện có.
+            create: Tạo mới bảng, xóa dữ liệu cũ (thận trọng khi dùng).
+            create-drop: Tạo bảng khi khởi động, xóa khi ứng dụng dừng.
+            validate: Chỉ kiểm tra schema, báo lỗi nếu không khớp.
+            -->
+
+            <!-- Echo all executed SQL to console -->
+            <property name="hibernate.show_sql" value="true" />
+            <property name="hibernate.format_sql" value="true" />
+            <property name="hibernate.highlight_sql" value="true" />
+
+        </properties>
+    </persistence-unit>
+</persistence>
